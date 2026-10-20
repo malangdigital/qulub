@@ -271,8 +271,8 @@
 
 /* Animasi sway untuk aset normal */
 @keyframes swayDecor {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(-2deg); }
-  50% { transform: translate3d(0, -1px, 0) rotate(2deg); }
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-3deg); }
+  50% { transform: translate3d(0, -3px, 0) rotate(3deg); }
 }
 
 /* Semua gambar dekorasi */
@@ -442,8 +442,17 @@
 .section-flower-layer.visible .section-decor img {
   will-change: transform;
   backface-visibility: hidden;
-  animation: swayDecor 5.5s ease-in-out
+  animation: swayDecor 4.5s ease-in-out
     calc(var(--section-delay, 0s) + 0.9s) infinite;
+}
+
+/* Lapisan peneduh agar teks Love Story tetap terbaca di atas background. */
+#love-story .love-story-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(74, 53, 36, 0.58);
+  pointer-events: none;
 }
 
 /* Posisi semak */
@@ -815,6 +824,7 @@
 
     <!-- ================= SECTION 6: LOVE STORY ================= -->
     <section id="love-story" class="relative bg-[#4A3524] px-6 py-24 text-center text-[#FBF7EF]" style="background: url('assets/background4.webp') center/cover no-repeat fixed;">
+      <div class="love-story-overlay" aria-hidden="true"></div>
       <!-- Dekorasi bunga dan semak: 9 aset -->
     <div class="section-flower-layer" aria-hidden="true">
       <div class="section-decor section-semak-left">
