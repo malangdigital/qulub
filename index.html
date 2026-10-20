@@ -396,6 +396,21 @@
     #wishesContainer::-webkit-scrollbar-thumb { background: #B08D45; border-radius: 4px; }
 
     
+/* Background Love Story tetap diam saat konten di-scroll */
+.love-story-fixed-bg {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  margin-top: -6rem;
+  margin-bottom: -100vh;
+  background-image: url('assets/background4.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* ================= DEKORASI BUNGA SECTION ================= */
 
 .section-flower-layer {
@@ -808,6 +823,7 @@
 
     <!-- ================= SECTION 6: LOVE STORY ================= -->
     <section id="love-story" class="relative bg-[#4A3524] px-6 py-24 text-center text-[#FBF7EF]">
+      <div class="love-story-fixed-bg" aria-hidden="true"></div>
       <!-- Dekorasi bunga dan semak: 9 aset -->
     <div class="section-flower-layer" aria-hidden="true">
       <div class="section-decor section-semak-left">
