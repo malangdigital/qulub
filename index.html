@@ -97,7 +97,7 @@
     }
     .slide-left-ornament.visible { opacity: 1; transform: translateX(0); }
     .slide-left-ornament.visible img, .slide-left-leaf.visible img {
-      animation: sway 4.5s ease-in-out infinite; transform-origin: bottom left;
+      animation: swayDecor 5.5s ease-in-out infinite; transform-origin: bottom left;
     }
 
     .slide-right-ornament {
@@ -106,7 +106,7 @@
     }
     .slide-right-ornament.visible { opacity: 1; transform: translateX(0) scaleX(-1); }
     .slide-right-ornament.visible img {
-      animation: sway 4.5s ease-in-out infinite; transform-origin: bottom right;
+      animation: swayDecor 5.5s ease-in-out infinite; transform-origin: bottom right;
     }
 
     .cover {
@@ -199,7 +199,7 @@
 }
 
     
-    .sway-item { transform-origin: bottom center; }
+    .sway-item { transform-origin: bottom center; will-change: transform; backface-visibility: hidden; }
     .hero-scene .sky-title { position: absolute; z-index: 35; top: 12%; left: 50%; width: 90%; text-align: center; color: #4A3524; opacity: 0; transform: translate(-50%, 20px); filter: blur(8px); }
 
     .hero-scene.scene-open .masjid { animation: masjidReveal 2s 2.5s cubic-bezier(0.2,0.8,0.2,1) forwards; }
@@ -207,7 +207,7 @@
     .hero-scene.scene-open .bukit-right { animation: slideInRightMirror 1.5s 2.6s cubic-bezier(0.2,0.8,0.2,1) forwards; }
     .hero-scene.scene-open .tree-top-left, .hero-scene.scene-open .tree-mid-left { animation: slideInLeft 1.5s 2.8s cubic-bezier(0.2,0.8,0.2,1) forwards; }
     .hero-scene.scene-open .tree-top-right, .hero-scene.scene-open .tree-mid-right { animation: slideInRightMirror 1.5s 2.8s cubic-bezier(0.2,0.8,0.2,1) forwards; }
-    .hero-scene.scene-open .tree-wrap .sway-item { animation: sway 4.5s 3.5s ease-in-out infinite; }
+    .hero-scene.scene-open .tree-wrap .sway-item { animation: swayTree 5.5s 3.5s ease-in-out infinite; }
     .hero-scene.scene-open .sky-title { animation: skyTitleReveal 1.5s 3.5s ease forwards; }
 
     @keyframes masjidReveal { to { opacity: 1; transform: translateX(-50%) scale(1); } }
@@ -215,9 +215,9 @@
     @keyframes slideInRightMirror { to { opacity: 1; transform: translateX(0) scaleX(-1); } }
     @keyframes skyTitleReveal { to { opacity: 1; filter: blur(0); transform: translate(-50%, 0); } }
     
-    @keyframes sway { 
-      0%, 100% { transform: rotate(0deg); } 
-      50% { transform: rotate(4deg) translateY(-2px); } 
+    @keyframes swayTree {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      50% { transform: translate3d(0, -2px, 0) rotate(2.5deg); }
     }
     
 
@@ -233,6 +233,8 @@
   pointer-events: none;
   transform: translateY(110%);
   transform-origin: bottom center;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 /* Animasi pop-up untuk aset kiri dan tengah */
@@ -268,13 +270,9 @@
 }
 
 /* Animasi sway untuk aset normal */
-@keyframes sway {
-  0%, 100% {
-    transform: rotate(-3deg);
-  }
-  50% {
-    transform: rotate(3deg);
-  }
+@keyframes swayDecor {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-2deg); }
+  50% { transform: translate3d(0, -1px, 0) rotate(2deg); }
 }
 
 /* Semua gambar dekorasi */
@@ -310,7 +308,7 @@
 
 /* Sway dimulai setelah pop-up selesai */
 .hero-scene.scene-open .opening-decor img {
-  animation: sway 4.5s ease-in-out
+  animation: swayDecor 5.5s ease-in-out
     calc(var(--pop-delay, 3.8s) + 0.9s) infinite;
 }
 
@@ -413,8 +411,10 @@
   height: auto;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(110%);
+  transform: translate3d(0, 110%, 0);
   transform-origin: bottom center;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .section-flower-layer .section-decor img {
@@ -422,6 +422,8 @@
   width: 100%;
   height: auto;
   transform-origin: bottom center;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 /* Pop-up setelah section terlihat */
@@ -438,7 +440,9 @@
 
 /* Sway dimulai setelah pop-up selesai */
 .section-flower-layer.visible .section-decor img {
-  animation: sway 4.5s ease-in-out
+  will-change: transform;
+  backface-visibility: hidden;
+  animation: swayDecor 5.5s ease-in-out
     calc(var(--section-delay, 0s) + 0.9s) infinite;
 }
 
@@ -533,7 +537,10 @@
   50% { transform: translateY(-14px) rotate(2deg); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .dove-decor { animation: none; }
+  .dove-decor,
+  .hero-scene.scene-open .tree-wrap .sway-item,
+  .hero-scene.scene-open .opening-decor img,
+  .section-flower-layer.visible .section-decor img { animation: none !important; }
 }
 
   
@@ -807,7 +814,7 @@
     </section>
 
     <!-- ================= SECTION 6: LOVE STORY ================= -->
-    <section id="love-story" class="relative bg-[#4A3524] px-6 py-24 text-center text-[#FBF7EF]">
+    <section id="love-story" class="relative bg-[#4A3524] px-6 py-24 text-center text-[#FBF7EF]" style="background: url('assets/background4.webp') center/cover no-repeat fixed;">
       <!-- Dekorasi bunga dan semak: 9 aset -->
     <div class="section-flower-layer" aria-hidden="true">
       <div class="section-decor section-semak-left">
@@ -986,7 +993,7 @@
     </section>
 
     <!-- ================= SECTION 10: PENUTUP (FOOTER) ================= -->
-    <section id="penutup" class="relative bg-[#4A3524] bg-cover bg-center px-6 py-28 text-center overflow-hidden text-[#FBF7EF]" style="background-image: url('assets/bg-gallery.webp');">
+    <section id="penutup" class="relative bg-[#4A3524] bg-cover bg-center px-6 py-28 text-center overflow-hidden text-[#FBF7EF]" style="background-image: url('assets/background3.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
       
 
       <div class="absolute inset-0 bg-[#4A3524]/85 z-0"></div>
