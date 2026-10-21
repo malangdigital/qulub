@@ -288,7 +288,7 @@
 ) {
   animation: openingPopUp 1.2s
     cubic-bezier(0.175, 0.885, 0.32, 1.275)
-    var(--pop-delay, 5.8s) both;
+    var(--pop-delay, 3.8s) both;
 }
 
 /* Pop-up untuk seluruh dekorasi kanan sekaligus mirror */
@@ -298,38 +298,38 @@
 .hero-scene.scene-open .opening-bunga2-b {
   animation: openingPopUpMirror 1.2s
     cubic-bezier(0.175, 0.885, 0.32, 1.275)
-    var(--pop-delay, 5.8s) both;
+    var(--pop-delay, 3.8s) both;
 }
 
 /* Sway dimulai setelah pop-up selesai */
 .hero-scene.scene-open .opening-decor img {
   animation: swayDecor 4s ease-in-out
-    calc(var(--pop-delay, 5.8s) + 1.2s) infinite;
+    calc(var(--pop-delay, 3.8s) + 1.2s) infinite;
 }
 
 /* SEMAK */
 .opening-semak1-left {
   left: -10%;
   width: 39%;
-  --pop-delay: 5.8s;
+  --pop-delay: 3.8s;
 }
 
 .opening-semak1-right {
   right: -10%;
   width: 39%;
-  --pop-delay: 6s;
+  --pop-delay: 4s;
 }
 
 .opening-semak2-left {
   left: 20%;
   width: 30%;
-  --pop-delay: 6.2s;
+  --pop-delay: 4.2s;
 }
 
 .opening-semak2-right {
   right: 20%;
   width: 30%;
-  --pop-delay: 6.4s;
+  --pop-delay: 4.4s;
 }
 
 /* BUNGA TENGAH */
@@ -337,7 +337,7 @@
   left: 30%;
   bottom: -2%;
   width: 40%;
-  --pop-delay: 6.6s;
+  --pop-delay: 4.6s;
 }
 
 /* BUNGA TAMBAHAN */
@@ -345,28 +345,28 @@
   left: 4%;
   bottom: -2%;
   width: 30%;
-  --pop-delay: 6.1s;
+  --pop-delay: 4.1s;
 }
 
 .opening-bunga1-b {
   right: 4%;
   bottom: -2%;
   width: 30%;
-  --pop-delay: 6.8s;
+  --pop-delay: 4.8s;
 }
 
 .opening-bunga2-a {
   left: 25%;
   bottom: -2%;
   width: 20%;
-  --pop-delay: 6.35s;
+  --pop-delay: 4.35s;
 }
 
 .opening-bunga2-b {
   right: 25%;
   bottom: -2%;
   width: 20%;
-  --pop-delay: 6.95s;
+  --pop-delay: 4.95s;
 }
     
     @keyframes disc { to { transform: rotate(360deg); } }
@@ -743,7 +743,7 @@
       <div class="relative z-10 max-w-md mx-auto text-[#FBF7EF]">
         <div class="entrance">
           <p class="text-[10px] font-bold tracking-[0.3em] uppercase text-[#B08D45]">Save the Date</p>
-          <h1 class="script mt-4 text-6xl">Our Special Day</h1>
+          <h1 class="script mt-4 text-3xl sm:text-5xl md:text-6xl whitespace-nowrap">Our Special Day</h1>
           <p class="serif mt-3 text-lg">Ahad, 22 November 2026</p>
         </div>
 
@@ -883,7 +883,7 @@
         </div>
 
         <!-- Penutup Rangkuman -->
-        <div class="entrance mt-12 p-6 rounded-2xl bg-[#B08D45]/10 border border-[#B08D45]/40 text-center">
+        <div class="entrance mt-12 p-6 rounded-2xl bg-[#B08D45]/10 border border-[#B08D45]/40 text-center backdrop-blur-sm mb-10">
           <p class="text-[10px] font-bold tracking-[0.2em] text-[#B08D45] uppercase mb-3">Dari Kami, Untuk Perjalanan yang Allah Ridai</p>
           <ul class="serif text-xs text-[#FBF7EF]/90 space-y-1.5 italic">
             <li><strong class="text-[#B08D45]">7 Juni 2026</strong> — Pertemuan Awal</li>
