@@ -301,10 +301,29 @@
     var(--pop-delay, 5.9s) both;
 }
 
-/* Sway dimulai 0.15s setelah pop-up 1.2s selesai */
+/* Sway mulai setelah pop-up selesai: 1.2s pop-up + jeda 0.06s */
 .hero-scene.scene-open .opening-decor img {
   animation: swayDecor 4s ease-in-out
-    calc(var(--pop-delay, 6.0s) + 1.35s) infinite;
+    calc(var(--pop-delay, 5.9s) + 1.26s) infinite;
+  animation-fill-mode: both;
+}
+
+/* Di HP, rapatkan jeda antar aset. Timing desktop tetap seperti semula. */
+@media (max-width: 640px) {
+  .hero-scene.scene-open .masjid { animation-delay: 3.0s; }
+  .hero-scene.scene-open .bukit-left,
+  .hero-scene.scene-open .bukit-right,
+  .hero-scene.scene-open .tree-top-left,
+  .hero-scene.scene-open .tree-mid-left,
+  .hero-scene.scene-open .tree-top-right,
+  .hero-scene.scene-open .tree-mid-right { animation-delay: 3.8s; }
+  .hero-scene.scene-open .tree-wrap .sway-item { animation-delay: 5.12s; }
+  .hero-scene.scene-open .sky-title { animation-delay: 6.45s; }
+  .opening-semak1-left, .opening-semak1-right { --pop-delay: 4.4s; }
+  .opening-semak2-left, .opening-semak2-right { --pop-delay: 4.58s; }
+  .opening-bunga1-a, .opening-bunga1-b { --pop-delay: 4.76s; }
+  .opening-bunga2-a, .opening-bunga2-b { --pop-delay: 4.94s; }
+  .opening-bunga3 { --pop-delay: 5.12s; }
 }
 
 /* SEMAK */
@@ -525,7 +544,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hero-scene.scene-open .tree-wrap .sway-item,
-  .hero-scene.scene-open .opening-decor img,
   .section-flower-layer.visible .section-decor img { animation: none !important; }
 }
 
