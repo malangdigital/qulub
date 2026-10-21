@@ -128,7 +128,7 @@
       z-index: 50; pointer-events: none;
       display: flex; justify-content: center; align-items: center;
       transform: scale(1.25);
-      transition: transform 1.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.1s ease;
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
       transform-origin: center center;
     }
     .hero-scene .curtain-container {
@@ -139,7 +139,7 @@
       position: absolute; inset: 0; width: 100%; height: 100%;
       object-fit: cover; object-position: center; pointer-events: none;
       opacity: 1; will-change: transform, opacity;
-      transition: transform 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+      transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
     }
     .hero-scene .curtain-left { transform: translateX(0); }
     .hero-scene .curtain-right { transform: translateX(0); }
@@ -150,7 +150,7 @@
     .hero-scene .gapura-wrapper.step-move-back { transform: scale(1); }
     .hero-scene .curtain-container.open .curtain-left { transform: translateX(-100%); }
     .hero-scene .curtain-container.open .curtain-right { transform: translateX(100%); }
-    .hero-scene .gapura-wrapper.zoom-in { transform: scale(4.5); opacity: 0; transition-duration: 1.3s, 1.1s; }
+    .hero-scene .gapura-wrapper.zoom-in { transform: scale(4.5); opacity: 0; transition-duration: 1.2s, 0.8s; }
 
     .hero-scene .masjid { position: absolute; z-index: 10; bottom: 0; left: 50%; width: 120%; max-width: none; transform: translateX(-50%) scale(1.2); transform-origin: center bottom; opacity: 0; }
     
@@ -286,8 +286,8 @@
   .opening-bunga1-b,
   .opening-bunga2-b
 ) {
-  animation: openingPopUp 1s
-    cubic-bezier(0.22, 1, 0.36, 1)
+  animation: openingPopUp 1.2s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275)
     var(--pop-delay, 5.8s) both;
 }
 
@@ -296,15 +296,15 @@
 .hero-scene.scene-open .opening-semak2-right,
 .hero-scene.scene-open .opening-bunga1-b,
 .hero-scene.scene-open .opening-bunga2-b {
-  animation: openingPopUpMirror 1s
-    cubic-bezier(0.22, 1, 0.36, 1)
+  animation: openingPopUpMirror 1.2s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275)
     var(--pop-delay, 5.8s) both;
 }
 
 /* Sway dimulai setelah pop-up selesai */
 .hero-scene.scene-open .opening-decor img {
-  animation: swayDecor 6s ease-in-out
-    calc(var(--pop-delay, 5.8s) + 1s) infinite;
+  animation: swayDecor 4s ease-in-out
+    calc(var(--pop-delay, 5.8s) + 1.2s) infinite;
 }
 
 /* SEMAK */
@@ -438,7 +438,7 @@
   will-change: transform;
   backface-visibility: hidden;
   animation: swayDecor 4.5s ease-in-out
-    calc(var(--section-delay, 0s) + 0.9s) infinite;
+    calc(var(--section-delay, 0s) + 1.2s) infinite;
 }
 
 /* Lapisan peneduh agar teks Love Story tetap terbaca di atas background. */
@@ -647,15 +647,17 @@
     </section>
 
     <!-- ================= SECTION AYAT ================= -->
-    <section id="ayat" class="relative bg-[#4A3524] px-6 py-24 text-center flex flex-col items-center text-[#FBF7EF]">
-      <div class="stagger max-w-xl mx-auto">
+    <section id="ayat" class="relative bg-[#4A3524] px-6 py-24 text-center flex flex-col items-center text-[#FBF7EF] overflow-hidden" style="background: url('assets/background3.webp') center/cover no-repeat;">
+      <div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true" style="background: rgba(48, 32, 22, 0.58);"></div>
+      <div class="stagger relative z-10 max-w-xl mx-auto">
         <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-[3px] border-[#B08D45] bg-white/10 shadow-inner mb-8">
-          <img src="assets/alquran.webp" alt="Masjid Icon" class="w-full h-full object-cover">
+          <img src="assets/alquran.webp" alt="Al-Qur'an" class="w-full h-full object-cover">
         </div>
-        
+        <div class="rounded-2xl border border-[#B08D45]/40 bg-white/10 backdrop-blur-sm shadow-xl px-6 py-8">
         <p class="arabic text-2xl leading-loose text-[#FBF7EF]">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
         <p class="serif italic text-sm text-[#FBF7EF]/90 mt-8 leading-relaxed">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."</p>
         <p class="mt-6 text-[10px] font-bold tracking-[0.2em] text-[#B08D45] uppercase">(QS. Ar-Rum: 21)</p>
+        </div>
       </div>
     </section>
 
@@ -767,7 +769,8 @@
     </section>
 
     <!-- ================= SECTION 5: DETAIL ACARA ================= -->
-    <section id="detail-acara" class="hero-scene scene relative bg-[#FBF7EF] px-6 py-24 text-center overflow-hidden">
+    <section id="detail-acara" class="hero-scene scene relative bg-[#FBF7EF] px-6 py-24 text-center overflow-hidden" style="background: url('assets/background5.webp') center/cover no-repeat;">
+      <div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true" style="background: rgba(251, 247, 239, 0.66);"></div>
       <div class="fade-in-scale relative z-20 max-w-md mx-auto border-[2px] border-[#B08D45] rounded-3xl overflow-hidden shadow-2xl bg-[#FBF7EF]">
         <img src="assets/background2.webp" class="absolute inset-0 w-full h-full object-cover object-center z-0" alt="Background Gunung Card">
         <div class="absolute inset-0 bg-[#FBF7EF]/85 z-0"></div>
@@ -894,8 +897,8 @@
 
     
     <!-- ================= SECTION 9: RSVP ================= -->
-    <section id="rsvp" class="relative bg-[#FBF7EF] px-6 py-24 text-center overflow-hidden">
-      
+    <section id="rsvp" class="relative bg-[#FBF7EF] px-6 py-24 text-center overflow-hidden" style="background: url('assets/background5.webp') center/cover no-repeat;">
+      <div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true" style="background: rgba(251, 247, 239, 0.66);"></div>
       <div class="fade-in-scale relative z-20 max-w-md mx-auto border-[2px] border-[#B08D45] rounded-3xl overflow-hidden shadow-2xl bg-[#FBF7EF] text-left">
         <img src="assets/background2.webp" class="absolute inset-0 w-full h-full object-cover object-center z-0" alt="Background Gallery Card">
         <div class="absolute inset-0 bg-[#FBF7EF]/80 z-0"></div>
@@ -1029,9 +1032,9 @@
           scene.classList.add('scene-open');
 
           // Urutan dibuat lebih lapang: gapura mundur, tirai terbuka, lalu gapura zoom setelah tirai hampir selesai.
-          setTimeout(() => gapuraWrapper.classList.add('step-move-back'), 800);
-          setTimeout(() => curtainContainer.classList.add('open'), 2400);
-          setTimeout(() => gapuraWrapper.classList.add('zoom-in'), 4300);
+          setTimeout(() => gapuraWrapper.classList.add('step-move-back'), 600);
+          setTimeout(() => curtainContainer.classList.add('open'), 1400);
+          setTimeout(() => gapuraWrapper.classList.add('zoom-in'), 2400);
         });
       });
 
