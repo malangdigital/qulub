@@ -901,7 +901,7 @@
         </div>
 
         <!-- Penutup Rangkuman -->
-        <div class="entrance mt-12 p-6 rounded-2xl bg-[#B08D45]/10 border border-[#B08D45]/40 text-center backdrop-blur-sm mb-10">
+        <div class="entrance mt-12 p-6 rounded-2xl bg-[#B08D45]/10 border border-[#B08D45]/40 text-center">
           <p class="text-[10px] font-bold tracking-[0.2em] text-[#B08D45] uppercase mb-3">Dari Kami, Untuk Perjalanan yang Allah Ridai</p>
           <ul class="serif text-xs text-[#FBF7EF]/90 space-y-1.5 italic">
             <li><strong class="text-[#B08D45]">7 Juni 2026</strong> — Pertemuan Awal</li>
@@ -1213,6 +1213,23 @@ document.querySelectorAll(
 
       const data = { nama, jumlah, konfirmasi, ucapan };
 
+      // Konfirmasi dan buka tab saat masih dalam interaksi klik agar tidak diblokir browser.
+      const wantsWhatsApp = confirm('Apakah Anda juga ingin mengirim pesan ini via WhatsApp?');
+      let waWindow = null;
+      let waUrl = '';
+
+      if (wantsWhatsApp) {
+        const waText = encodeURIComponent(
+          '*RSVP Pernikahan Hafidz & Zakiya*\\n\\n' +
+          '👤 Nama: ' + nama + '\\n' +
+          '👥 Jumlah Hadir: ' + jumlah + ' orang\\n' +
+          '✅ Konfirmasi: ' + (konfirmasi === 'hadir' ? 'Hadir' : 'Berhalangan Hadir') + '\\n' +
+          (ucapan ? '💌 Ucapan: "' + ucapan + '"' : '')
+        );
+        waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + waText;
+        waWindow = window.open('about:blank', '_blank');
+      }
+
       try {
         await fetch(GAS_URL, {
           method: 'POST',
@@ -1228,16 +1245,15 @@ document.querySelectorAll(
         btn.classList.remove('bg-[#4A3524]');
         btn.classList.add('bg-[#8A704A]');
 
-        // Tanya user mau kirim via WhatsApp atau tidak
-        if (confirm('Apakah Anda juga ingin mengirim pesan ini via WhatsApp?')) {
-          const waText = encodeURIComponent(
-            '*RSVP Pernikahan Hafidz & Zakiya*\n\n' +
-            '👤 Nama: ' + nama + '\n' +
-            '👥 Jumlah Hadir: ' + jumlah + ' orang\n' +
-            '✅ Konfirmasi: ' + (konfirmasi === 'hadir' ? 'Hadir' : 'Berhalangan Hadir') + '\n' +
-            (ucapan ? '💌 Ucapan: "' + ucapan + '"' : '')
-          );
-          window.open('https://wa.me/' + WA_NUMBER + '?text=' + waText, '_blank');
+        // Arahkan tab yang sudah disiapkan ke WhatsApp setelah proses submit.
+        if (wantsWhatsApp) {
+          if (waWindow && !waWindow.closed) {
+            waWindow.location.href = waUrl;
+          } else {
+            // Fallback bila browser memblokir tab baru.
+            window.location.href = waUrl;
+            return;
+          }
         }
 
         // Reset form
@@ -1254,6 +1270,7 @@ document.querySelectorAll(
         }, 2500);
 
       } catch (error) {
+        if (waWindow && !waWindow.closed) waWindow.close();
         console.error('Error:', error);
         alert('Gagal mengirim. Silakan coba lagi.');
         btn.disabled = false;
